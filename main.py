@@ -26,8 +26,12 @@ if __name__ == "__main__":
 
     if project_name is None:
         raise "please name your project"
+    args = {'project_name': project_name, 'base_dir': BASE_DIR}
 
-    create_dj(project_name=PROJECT_NAME, base_dir=BASE_DIR)
+    if dj_version != '' or dj_version is not None:
+        args.update({"django_version": dj_version})
+
+    create_dj(**args)
     BASE_DIR = f"{BASE_DIR}/{PROJECT_NAME}"
     create_webapp(project_dir=BASE_DIR)
     create_settings(project_name=PROJECT_NAME, project_dir=BASE_DIR)
